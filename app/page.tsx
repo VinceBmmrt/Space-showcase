@@ -21,8 +21,8 @@ export default function Home() {
 
   // Spaceship state
   const spaceshipRef = useRef({
-    x: window.innerWidth / 2 - 50 / 2,
-    y: window.innerHeight / 2 - 30 / 2,
+    x: 0,
+    y: 0,
     width: 50,
     height: 30,
     speed: 5,
@@ -172,6 +172,14 @@ export default function Home() {
     ArrowRight: false,
     " ": false, // Space
   });
+
+  useEffect(() => {
+    // Center the ship
+    spaceshipRef.current.x =
+      window.innerWidth / 2 - spaceshipRef.current.width / 2;
+    spaceshipRef.current.y =
+      window.innerHeight / 2 - spaceshipRef.current.height / 2;
+  }, []);
 
   // Handle key events
   useEffect(() => {
