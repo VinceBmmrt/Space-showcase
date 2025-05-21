@@ -21,8 +21,8 @@ export default function Home() {
 
   // Spaceship state
   const spaceshipRef = useRef({
-    x: 0,
-    y: 0,
+    x: window.innerWidth / 2 - 50 / 2,
+    y: window.innerHeight / 2 - 30 / 2,
     width: 50,
     height: 30,
     speed: 5,
@@ -465,7 +465,7 @@ export default function Home() {
         </p>
         <audio
           src="/music/space-ambient.mp3"
-           autoPlay
+          autoPlay
           loop
           controls
           muted={false}
