@@ -19,6 +19,9 @@ export default function Home() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const requestRef = useRef<number>(0);
 
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const [played, setPlayed] = useState(false);
+
   // Spaceship state
   const spaceshipRef = useRef({
     x: 0,
@@ -179,6 +182,20 @@ export default function Home() {
       window.innerWidth / 2 - spaceshipRef.current.width / 2;
     spaceshipRef.current.y =
       window.innerHeight / 2 - spaceshipRef.current.height / 2;
+    // Manage Sound
+    if (audioRef.current) {
+      audioRef.current.volume = 0.1;
+    }
+    //Autoplay
+    const playAudio = () => {
+      if (!played && audioRef.current) {
+        audioRef.current.play();
+        setPlayed(true);
+      }
+    };
+
+    window.addEventListener("keydown", playAudio);
+    window.addEventListener("click", playAudio);
   }, []);
 
   // Handle key events
@@ -472,6 +489,7 @@ export default function Home() {
           une planète
         </p>
         <audio
+          ref={audioRef}
           src="/music/space-ambient.mp3"
           autoPlay
           loop
